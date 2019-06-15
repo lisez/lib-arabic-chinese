@@ -1,0 +1,24 @@
+{
+  "name": "chinese-number-converter",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "git@github.com:lisez/chinese-number-converter.git",
+  "author": "lisez <sujingjhong@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.14",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "typescript": "^3"
+  }
+}
