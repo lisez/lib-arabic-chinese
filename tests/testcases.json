@@ -1,5 +1,27 @@
 [
   {
+    "set": "options - case type",
+    "options": {
+      "caseType": "lower"
+    },
+    "data": {
+      "63,140,669": "六千三百一十四萬零六百六十九"
+    }
+  },
+
+  {
+    "set": "options - prefix & suffix",
+    "options": {
+      "caseType": "lower",
+      "prefix": "新台幣",
+      "suffix": "元整"
+    },
+    "data": {
+      "63,140,669": "新台幣六千三百一十四萬零六百六十九元整"
+    }
+  },
+
+  {
     "set": "basic number",
     "data": {
       "0": "零",

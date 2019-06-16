@@ -1,10 +1,13 @@
 import Digit, { TConfig } from './Digit';
 
-export type TConverterConfig = Pick<TConfig, Exclude<keyof TConfig, 'placeUnit'>>;
+export interface IConverterConfig extends Pick<TConfig, Exclude<keyof TConfig, 'placeUnit'>> {
+  readonly prefix: string;
+  readonly suffix: string;
+}
 
 export default function main(
   text: number | string,
-  config: Partial<TConverterConfig> = {}
+  config: Partial<IConverterConfig> = {}
 ): string {
   if (typeof text === 'number') {
     return main(text.toString(), config);
@@ -30,5 +33,10 @@ export default function main(
       digits.push(digit);
     });
 
-  return digits.reduce((p, c) => c.toString() + p, '');
+  const number = digits.reduce((p, c) => c.toString() + p, '');
+
+  const prefix = (config.prefix !== void 0 && config.prefix) || '';
+  const suffix = (config.suffix !== void 0 && config.suffix) || '';
+
+  return prefix + number + suffix;
 }
