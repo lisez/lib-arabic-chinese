@@ -1,4 +1,5 @@
 import { Configuration } from 'webpack';
+import path from 'path';
 
 type TNodeEnv = 'development' | 'production';
 
@@ -9,7 +10,11 @@ const webpackConfig: Configuration = {
   devtool: nodeEnv === 'development' ? 'source-map' : false,
   entry: './src/index.ts',
   output: {
-    filename: './index.js'
+    path: path.resolve('./dist'),
+    filename: './index.js',
+    library: 'libArabicChinese',
+    libraryTarget: 'window',
+    libraryExport: 'default'
   },
   resolve: { extensions: ['.ts', '.tsx', '.js'] },
   module: {
