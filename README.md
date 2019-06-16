@@ -1,1 +1,1 @@
-# chinese-number-converter
+# arabic-chinese-number-converter

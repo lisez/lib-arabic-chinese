@@ -1,8 +1,8 @@
 {
-  "name": "chinese-number-converter",
+  "name": "lib-arabic-chinese",
   "version": "1.0.0",
   "main": "dist/bundle.js",
-  "repository": "git@github.com:lisez/chinese-number-converter.git",
+  "repository": "git@github.com:lisez/lib-arabic-chinese.git",
   "author": "lisez <sujingjhong@gmail.com>",
   "license": "MIT",
   "private": false,
