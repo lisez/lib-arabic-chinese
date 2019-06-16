@@ -13,8 +13,9 @@ const webpackConfig: Configuration = {
     path: path.resolve('./dist'),
     filename: './index.js',
     library: 'libArabicChinese',
-    libraryTarget: 'window',
-    libraryExport: 'default'
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+    umdNamedDefine: true
   },
   resolve: { extensions: ['.ts', '.tsx', '.js'] },
   module: {
