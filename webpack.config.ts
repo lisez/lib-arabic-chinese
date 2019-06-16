@@ -9,7 +9,7 @@ const webpackConfig: Configuration = {
   devtool: nodeEnv === 'development' ? 'source-map' : false,
   entry: './src/index.ts',
   output: {
-    filename: './bundle.js'
+    filename: './index.js'
   },
   resolve: { extensions: ['.ts', '.tsx', '.js'] },
   module: {
