@@ -109,12 +109,28 @@ export default class Digit extends String {
     return this;
   }
 
-  public get isSingle(): boolean {
+  private get isSingle(): boolean {
     return this.prev === void 0 && this.next === void 0;
   }
 
-  public get isLargeUnit(): boolean {
-    return this.config.placeUnit % 4 === 0;
+  private get isLargeUnit(): boolean {
+    return this.config.placeUnit !== 0 && this.config.placeUnit % 4 === 0;
+  }
+
+  private get isLargeUnitVisible(): boolean {
+    if (this.isLargeUnit) {
+      let tokens = 2;
+      let pointer = this.next;
+      while (tokens >= 0 && pointer) {
+        if (pointer.toNumber() !== 0) {
+          return true;
+        }
+        pointer = pointer.next;
+        tokens -= 1;
+      }
+      return false;
+    }
+    return false;
   }
 
   private get isZeroEnd(): boolean {
@@ -164,7 +180,7 @@ export default class Digit extends String {
   }
 
   private get unit(): string {
-    if (this.unitType === 0 || (this.toNumber() === 0 && (!this.isLargeUnit || this.isZeroEnd))) {
+    if (this.unitType === 0 || (this.toNumber() === 0 && !this.isLargeUnitVisible)) {
       return '';
     }
 
