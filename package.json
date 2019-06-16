@@ -1,8 +1,28 @@
 {
   "name": "lib-arabic-chinese",
   "version": "1.0.0",
+  "description": "A library for converting from Arabic numbers to Chinese numbers",
   "main": "dist/bundle.js",
-  "repository": "git@github.com:lisez/lib-arabic-chinese.git",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lisez/lib-arabic-chinese.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lisez/lib-arabic-chinese/issues"
+  },
+  "homepage": "https://github.com/lisez/lib-arabic-chinese",
+  "keywords": [
+    "typescript",
+    "javascript",
+    "chinese",
+    "chinese-number",
+    "arabic",
+    "arabic-number",
+    "converter",
+    "number",
+    "numeral"
+  ],
   "author": "lisez <sujingjhong@gmail.com>",
   "license": "MIT",
   "private": false,
