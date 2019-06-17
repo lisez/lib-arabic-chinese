@@ -5,6 +5,19 @@ export interface IConverterConfig extends Pick<TConfig, Exclude<keyof TConfig, '
   readonly suffix: string;
 }
 
+function numberTextToDigits(numbers: string[], config: Partial<IConverterConfig> = {}): Digit[] {
+  const digits: Digit[] = [];
+  numbers.forEach((n, i) => {
+    const digit = new Digit(n, { ...config, placeUnit: i });
+    if (digits.length > 0) {
+      digit.setPrev(digits[i - 1]);
+      digits[i - 1].setNext(digit);
+    }
+    digits.push(digit);
+  });
+  return digits;
+}
+
 export default function main(
   text: number | string,
   config: Partial<IConverterConfig> = {}
@@ -19,19 +32,13 @@ export default function main(
     return text;
   }
 
-  const digits: Digit[] = [];
-  toNormal
-    .replace(/[,，]/g, '')
-    .split('')
-    .reverse()
-    .forEach((n, i) => {
-      const digit = new Digit(n, { ...config, placeUnit: i });
-      if (digits.length > 0) {
-        digit.setPrev(digits[i - 1]);
-        digits[i - 1].setNext(digit);
-      }
-      digits.push(digit);
-    });
+  const digits = numberTextToDigits(
+    toNormal
+      .replace(/[,，]/g, '')
+      .split('')
+      .reverse(),
+    config
+  );
 
   const number = digits.reduce((p, c) => c.toString() + p, '');
 
