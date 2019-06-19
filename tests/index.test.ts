@@ -5,7 +5,7 @@ for (const testset of TestCases) {
   describe(testset.set, () => {
     for (let [tNumber, eValue] of Object.entries(testset.data)) {
       test(`${tNumber} -> ${eValue}`, () => {
-        const aValue = Converter(tNumber, <IConverterConfig>testset.options || {});
+        const aValue = Converter(tNumber, <IConverterConfig>(testset.options || {}));
         expect(aValue).toEqual(eValue);
       });
     }
