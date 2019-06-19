@@ -22,6 +22,32 @@
   },
 
   {
+    "set": "options - allowSigned 1",
+    "options": {
+      "showPlusSigned": true,
+      "showMinusSigned": true
+    },
+    "data": {
+      "63,140,669": "陸仟參佰壹拾肆萬零陸佰陸拾玖",
+      "+63,140,669": "正陸仟參佰壹拾肆萬零陸佰陸拾玖",
+      "-63,140,669": "負陸仟參佰壹拾肆萬零陸佰陸拾玖"
+    }
+  },
+
+  {
+    "set": "options - allowSigned 2",
+    "options": {
+      "showPlusSigned": false,
+      "showMinusSigned": false
+    },
+    "data": {
+      "63,140,669": "陸仟參佰壹拾肆萬零陸佰陸拾玖",
+      "+63,140,669": "陸仟參佰壹拾肆萬零陸佰陸拾玖",
+      "-63,140,669": "陸仟參佰壹拾肆萬零陸佰陸拾玖"
+    }
+  },
+
+  {
     "set": "basic number",
     "data": {
       "0": "零",
