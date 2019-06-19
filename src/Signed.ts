@@ -1,20 +1,22 @@
-export type TSigned = 'plus' | 'minus';
+export type TSigned = 'plusSigned' | 'minusSigned';
 
 export type TSignedMapping = { [signed in TSigned]: string };
 
 export type TSignedConfig = {
+  readonly signedOutput: TSignedMapping;
   readonly showPlusSigned: boolean;
   readonly showMinusSigned: boolean;
 };
 
 export const signedMapping: TSignedMapping = {
-  plus: '正',
-  minus: '負'
+  plusSigned: '正',
+  minusSigned: '負'
 };
 
 export const defaultSignedConfig: TSignedConfig = {
   showPlusSigned: false,
-  showMinusSigned: true
+  showMinusSigned: true,
+  signedOutput: signedMapping
 };
 
 export default class Signed extends String {
@@ -52,6 +54,11 @@ export default class Signed extends String {
     }
   }
 
+  private get mapping(): { symbol: TSignedMapping } {
+    const symbol = this.config.signedOutput;
+    return { symbol };
+  }
+
   public get isPlus(): boolean {
     return Signed.isPlus(this.valueOf());
   }
@@ -62,10 +69,10 @@ export default class Signed extends String {
 
   public get value(): string {
     if (this.isPlus) {
-      return signedMapping['plus'];
+      return this.mapping.symbol['plusSigned'];
     }
     if (this.isMinus) {
-      return signedMapping['minus'];
+      return this.mapping.symbol['minusSigned'];
     }
 
     return '';

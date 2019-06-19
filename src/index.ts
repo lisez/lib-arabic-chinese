@@ -1,4 +1,4 @@
-import Signed, { TSignedConfig } from './Signed';
+import Signed, { TSignedConfig, defaultSignedConfig } from './Signed';
 import Digit, { TConfig, defaultConfig } from './Digit';
 
 type prefixPosition = 'before-signed' | 'after-signed';
@@ -13,10 +13,9 @@ export interface IConverterConfig
 
 const defaultConverterConfig: IConverterConfig = {
   ...defaultConfig,
+  ...defaultSignedConfig,
   prefix: '',
   suffix: '',
-  showPlusSigned: false,
-  showMinusSigned: true,
   prefixPosition: 'after-signed'
 };
 
