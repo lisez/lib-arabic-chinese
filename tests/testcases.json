@@ -22,7 +22,7 @@
   },
 
   {
-    "set": "options - allowSigned 1",
+    "set": "options - signed 1",
     "options": {
       "showPlusSigned": true,
       "showMinusSigned": true
@@ -35,7 +35,7 @@
   },
 
   {
-    "set": "options - allowSigned 2",
+    "set": "options - signed 2",
     "options": {
       "showPlusSigned": false,
       "showMinusSigned": false
@@ -44,6 +44,34 @@
       "63,140,669": "陸仟參佰壹拾肆萬零陸佰陸拾玖",
       "+63,140,669": "陸仟參佰壹拾肆萬零陸佰陸拾玖",
       "-63,140,669": "陸仟參佰壹拾肆萬零陸佰陸拾玖"
+    }
+  },
+
+  {
+    "set": "options - prefix position 1",
+    "options": {
+      "prefix": "攝氏",
+      "prefixPosition": "after-signed",
+      "showPlusSigned": true
+    },
+    "data": {
+      "63,140,669": "攝氏陸仟參佰壹拾肆萬零陸佰陸拾玖",
+      "+63,140,669": "正攝氏陸仟參佰壹拾肆萬零陸佰陸拾玖",
+      "-63,140,669": "負攝氏陸仟參佰壹拾肆萬零陸佰陸拾玖"
+    }
+  },
+
+  {
+    "set": "options - prefix position 2",
+    "options": {
+      "prefix": "攝氏",
+      "prefixPosition": "before-signed",
+      "showPlusSigned": true
+    },
+    "data": {
+      "63,140,669": "攝氏陸仟參佰壹拾肆萬零陸佰陸拾玖",
+      "+63,140,669": "攝氏正陸仟參佰壹拾肆萬零陸佰陸拾玖",
+      "-63,140,669": "攝氏負陸仟參佰壹拾肆萬零陸佰陸拾玖"
     }
   },
 

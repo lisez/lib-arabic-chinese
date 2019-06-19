@@ -1,11 +1,14 @@
 import Signed, { TSignedConfig } from './Signed';
 import Digit, { TConfig, defaultConfig } from './Digit';
 
+type prefixPosition = 'before-signed' | 'after-signed';
+
 export interface IConverterConfig
   extends Pick<TConfig, Exclude<keyof TConfig, 'placeUnit'>>,
     TSignedConfig {
   readonly prefix: string;
   readonly suffix: string;
+  readonly prefixPosition: prefixPosition;
 }
 
 const defaultConverterConfig: IConverterConfig = {
@@ -13,7 +16,8 @@ const defaultConverterConfig: IConverterConfig = {
   prefix: '',
   suffix: '',
   showPlusSigned: false,
-  showMinusSigned: true
+  showMinusSigned: true,
+  prefixPosition: 'after-signed'
 };
 
 function objectize(numbers: string[], config: Partial<IConverterConfig> = {}): Digit[] {
@@ -67,5 +71,12 @@ export default function main(
   const prefix = (config.prefix !== void 0 && config.prefix) || '';
   const suffix = (config.suffix !== void 0 && config.suffix) || '';
 
-  return prefix + signed + number + suffix;
+  let head = '';
+  if (config.prefixPosition === 'after-signed') {
+    head += signed + prefix;
+  } else if (config.prefixPosition === 'before-signed') {
+    head += prefix + signed;
+  }
+
+  return head + number + suffix;
 }
