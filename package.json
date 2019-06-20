@@ -1,6 +1,6 @@
 {
   "name": "lib-arabic-chinese",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A library for converting from Arabic numbers to Chinese numbers",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,7 +36,8 @@
     "prebundle": "yarn lint",
     "bundle": "webpack",
     "test": "jest",
-    "prepare": "NODE_ENV=production yarn bundle"
+    "prepare": "NODE_ENV=production yarn bundle",
+    "demo": "ts-node --files ./demo/index.ts"
   },
   "devDependencies": {
     "@types/jest": "^24.0.14",
