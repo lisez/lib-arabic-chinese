@@ -19,7 +19,7 @@ const defaultConverterConfig: IConverterConfig = {
   prefixPosition: 'after-signed'
 };
 
-function objectize(numbers: string[], config: Partial<IConverterConfig> = {}): Digit[] {
+function objectize(numbers: string[], config: RecursivePartial<IConverterConfig> = {}): Digit[] {
   const digits: Digit[] = [];
   numbers.forEach((n, i) => {
     const digit = new Digit(n, { ...config, placeUnit: i });
@@ -38,7 +38,7 @@ function isValidNumberText(nText: string): boolean {
 
 export default function main(
   text: number | string,
-  userConfig: Partial<IConverterConfig> = defaultConverterConfig
+  userConfig: RecursivePartial<IConverterConfig> = defaultConverterConfig
 ): string {
   if (typeof text === 'number') {
     return main(text.toString(), userConfig);

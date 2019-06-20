@@ -36,7 +36,7 @@ export default class Signed extends String {
   config: TSignedConfig;
 
   // @ts-ignore
-  constructor(signed: string, config: Partial<TSignedConfig> = {}) {
+  constructor(signed: string, config: RecursivePartial<TSignedConfig> = {}) {
     // @ts-ignore
     this = new String(signed);
     // @ts-ignore
