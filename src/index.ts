@@ -1,42 +1,81 @@
-import Digit, { TConfig } from './Digit';
+import Signed, { TSignedConfig, defaultSignedConfig } from './Signed';
+import Digit, { TConfig, defaultConfig } from './Digit';
 
-export interface IConverterConfig extends Pick<TConfig, Exclude<keyof TConfig, 'placeUnit'>> {
+type prefixPosition = 'before-signed' | 'after-signed';
+
+export interface IConverterConfig
+  extends Pick<TConfig, Exclude<keyof TConfig, 'placeUnit'>>,
+    TSignedConfig {
   readonly prefix: string;
   readonly suffix: string;
+  readonly prefixPosition: prefixPosition;
+}
+
+const defaultConverterConfig: IConverterConfig = {
+  ...defaultConfig,
+  ...defaultSignedConfig,
+  prefix: '',
+  suffix: '',
+  prefixPosition: 'after-signed'
+};
+
+function objectize(numbers: string[], config: RecursivePartial<IConverterConfig> = {}): Digit[] {
+  const digits: Digit[] = [];
+  numbers.forEach((n, i) => {
+    const digit = new Digit(n, { ...config, placeUnit: i });
+    if (digits.length > 0) {
+      digit.setPrev(digits[i - 1]);
+      digits[i - 1].setNext(digit);
+    }
+    digits.push(digit);
+  });
+  return digits;
+}
+
+function isValidNumberText(nText: string): boolean {
+  return /^[+-]?(?:\d[\d,，]+\d|\d+)/.test(nText);
 }
 
 export default function main(
   text: number | string,
-  config: Partial<IConverterConfig> = {}
+  userConfig: RecursivePartial<IConverterConfig> = defaultConverterConfig
 ): string {
   if (typeof text === 'number') {
-    return main(text.toString(), config);
+    return main(text.toString(), userConfig);
   }
 
   const toNormal = text.normalize('NFKC');
+  const config = { ...defaultConverterConfig, ...(userConfig || {}) };
 
-  if (!/^[\d,，]+/.test(toNormal)) {
+  if (!isValidNumberText(toNormal)) {
     return text;
   }
 
-  const digits: Digit[] = [];
-  toNormal
+  const hasSigned = Signed.hasSigned(toNormal);
+
+  let signed: string = '';
+  if (hasSigned) {
+    signed = new Signed(toNormal.charAt(0), config).toString();
+  }
+
+  const numberText = hasSigned ? toNormal.slice(1) : toNormal;
+  const numberToChars = numberText
     .replace(/[,，]/g, '')
     .split('')
-    .reverse()
-    .forEach((n, i) => {
-      const digit = new Digit(n, { ...config, placeUnit: i });
-      if (digits.length > 0) {
-        digit.setPrev(digits[i - 1]);
-        digits[i - 1].setNext(digit);
-      }
-      digits.push(digit);
-    });
+    .reverse();
 
-  const number = digits.reduce((p, c) => c.toString() + p, '');
+  const numberToDigits = objectize(numberToChars, config);
+  const number = numberToDigits.reduce((p, c) => c.toString() + p, '');
 
   const prefix = (config.prefix !== void 0 && config.prefix) || '';
   const suffix = (config.suffix !== void 0 && config.suffix) || '';
 
-  return prefix + number + suffix;
+  let head = '';
+  if (config.prefixPosition === 'after-signed') {
+    head += signed + prefix;
+  } else if (config.prefixPosition === 'before-signed') {
+    head += prefix + signed;
+  }
+
+  return head + number + suffix;
 }
