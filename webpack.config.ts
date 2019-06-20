@@ -19,7 +19,15 @@ const webpackConfig: Configuration = {
   },
   resolve: { extensions: ['.ts', '.tsx', '.js'] },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }]
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {
+          configFile: path.resolve('./tsconfig.build.json')
+        }
+      }
+    ]
   }
 };
 
