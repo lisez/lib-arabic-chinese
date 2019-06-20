@@ -9,6 +9,7 @@ A library for converting from Arabic numbers to Chinese numbers. For example, `8
 - Support `Node.js` and `browser`.
 - Support uppercase(ex. `壹貳參`) or lowercase(ex. `一二三`).
 - Support customized prefix/suffix.
+- Support customized output style of signed symbols.
 
 ## Installation
 
@@ -22,6 +23,8 @@ npm install lib-arabic-chinese
 
 ## Usage
 
+Simple and easy to use:
+
 ```javascript
 import converter from 'lib-arabic-chinese';
 import assert from 'assert';
@@ -33,23 +36,58 @@ assert.equal(test1, '壹佰貳拾參');
 // auto drop commas
 const test2 = converter('1,123');
 assert.equal(test2, '壹仟壹佰貳拾參');
+```
 
-// with options
+Full options for customizing:
+
+```javascript
+// lower case or upper case, default: upper
 const test3 = converter('123', { caseType: 'lower' });
 assert.equal(test3, '一百二十三');
 
+// suffix and prefix, default: empty string
 const test4 = converter('123', { prefix: '新台幣', suffix: '元整' });
 assert.equal(test4, '新台幣壹佰貳拾參元整');
 
 const test5 = converter('123', { prefix: '新台幣', suffix: '元整', caseType: 'lower' });
 assert.equal(test5, '新台幣一百二十三元整');
+
+// show signed or not, default: hide plus signed, show minus signed
+const test6 = converter('+123');
+assert.equal(test6, '壹佰貳拾參');
+
+const test7 = converter('-123');
+assert.equal(test7, '負壹佰貳拾參');
+
+// flexible prefix position with signed, default: prefix will be placed after signed
+const test8 = converter('-123', { prefix: '海拔', prefixPosition: 'before-signed' });
+assert.equal(test8, '海拔負壹佰貳拾參');
+
+// Able to customize the output of signed symbols, default: 正 for plus, 負 for minus
+const test9 = converter('-123', { signedOutput: { minusSigned: '下降' } });
+assert.equal(test9, '下降壹佰貳拾參');
+```
+
+## Options
+
+The default configuration options would be:
+
+```javascript
+{ caseType: 'upper', // `upper` | `lower`
+  showPlusSigned: false,
+  showMinusSigned: true,
+  signedOutput: { plusSigned: '正', minusSigned: '負' },
+  prefix: '',
+  suffix: '',
+  prefixPosition: 'after-signed' // `after-signed` | `before-signed`
+}
 ```
 
 ## Todo & Roadmap
 
 - [ ] Support Simple Chinese. (ex. `億/亿`)
 - [x] Support Positive numbers (integer).
-- [ ] Support Negative numbers (integer).
+- [x] Support Negative numbers (integer).
 - [ ] Support Floating numbers. (ex. `3.14` to `三點一四`)
 - [ ] Support Fraction numbers. (ex. `4/5` to `五分之四`)
 - [ ] Support Mixing numbers. (ex. `4,500萬` to `四千五百萬`)

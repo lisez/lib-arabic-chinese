@@ -36,7 +36,8 @@
     "prebundle": "yarn lint",
     "bundle": "webpack",
     "test": "jest",
-    "prepare": "NODE_ENV=production yarn bundle"
+    "prepare": "NODE_ENV=production yarn bundle",
+    "demo": "ts-node --files ./demo/index.ts"
   },
   "devDependencies": {
     "@types/jest": "^24.0.14",
