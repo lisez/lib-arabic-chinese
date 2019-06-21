@@ -10,6 +10,7 @@ A library for converting from Arabic numbers to Chinese numbers. For example, `8
 - Support uppercase(ex. `壹貳參`) or lowercase(ex. `一二三`).
 - Support customized prefix/suffix.
 - Support customized output style of signed symbols.
+- Support `Nubmer` and `BigInt`.
 
 ## Installation
 
@@ -67,6 +68,25 @@ assert.equal(test8, '海拔負壹佰貳拾參');
 const test9 = converter('-123', { signedOutput: { minusSigned: '下降' } });
 assert.equal(test9, '下降壹佰貳拾參');
 ```
+
+### `Important`: BigInt and Number
+
+The conveter could be passed `Number` or `BigInt` now. But it only calls `Number.prototype.toString` and `BigInt.prototype.toString` methods to make a `String`. Then **it might be occurred some unexpected behaviours while it calls if the number is overflowed.**
+
+For example:
+
+```bash
+> Number(Number.MAX_SAFE_INTEGER).toString()
+'9007199254740991'
+> Number(Math.pow(2,69)).toString()
+'590295810358705700000'
+> Number(Math.pow(2,70)).toString()
+'1.1805916207174113e+21'
+> BigInt(Math.pow(2,70)).toString()
+'1180591620717411303424'
+```
+
+`Node.js` will convert `Number(Math.pow(2,70))` into `1.1805916207174113e+21`. It is unable to convert to Chinese number format. So, the converter now will throw an error. But if it is `BigInt`, it will be safely to convert to a clearly number. However, **it also has to be mentioned the overflow issue with `BigInt`.**
 
 ## Options
 
