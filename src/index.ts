@@ -37,18 +37,18 @@ function isValidNumberText(nText: string): boolean {
 }
 
 export default function main(
-  text: number | string,
+  text: string | number | bigint,
   userConfig: RecursivePartial<IConverterConfig> = defaultConverterConfig
 ): string {
-  if (typeof text === 'number') {
+  if (typeof text === 'number' || typeof text === 'bigint') {
     return main(text.toString(), userConfig);
   }
 
-  const toNormal = text.normalize('NFKC');
+  const toNormal = (<string>text).normalize('NFKC');
   const config = { ...defaultConverterConfig, ...(userConfig || {}) };
 
   if (!isValidNumberText(toNormal)) {
-    return text;
+    throw new Error('invalid number or number has exponent symbol after it has been converted. ');
   }
 
   const hasSigned = Signed.hasSigned(toNormal);
