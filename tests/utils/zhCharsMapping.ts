@@ -25,7 +25,7 @@ const zhCharMapping: { [char: string]: string } = {
   八: '八',
   九: '九',
   // upper case unit
-  拾: '十',
+  拾: '拾',
   佰: '佰',
   仟: '仟',
   // lower case unit
