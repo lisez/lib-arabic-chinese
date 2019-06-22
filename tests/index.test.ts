@@ -1,5 +1,6 @@
 import Converter, { IConverterConfig } from '../src/index';
 import TestCases from './testcases.json';
+import zhCharMapping from './utils/zhCharsMapping';
 
 for (const testset of TestCases) {
   describe(testset.set, () => {
@@ -7,6 +8,17 @@ for (const testset of TestCases) {
       test(`(String) ${tNumber} -> ${eValue}`, () => {
         const aValue = Converter(tNumber, <IConverterConfig>(testset.options || {}));
         expect(aValue).toEqual(eValue);
+      });
+
+      // to simple
+      const toSimple = (<string>eValue)
+        .split('')
+        .map(c => zhCharMapping[c] || c)
+        .join('');
+      test(`(Simple) ${tNumber} -> ${toSimple}`, () => {
+        const opt = <IConverterConfig>{ ...(testset.options || {}), lang: 'zh-cn' };
+        const sValue = Converter(tNumber, opt);
+        expect(sValue).toEqual(toSimple);
       });
 
       // to Number
