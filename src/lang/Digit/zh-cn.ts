@@ -6,7 +6,7 @@ const mapping: TDigitMapping = {
   lowerCaseMapping: ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
 
   upperCaseUnitMapping: {
-    '1': '十',
+    '1': '拾',
     '2': '佰',
     '3': '仟'
   },
