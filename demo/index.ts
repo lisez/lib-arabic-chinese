@@ -34,3 +34,7 @@ assert.equal(test8, '海拔負壹佰貳拾參');
 // Able to customize the output of signed symbols, default: 正 for plus, 負 for minus
 const test9 = converter('-123', { signedOutput: { minusSigned: '下降' } });
 assert.equal(test9, '下降壹佰貳拾參');
+
+// Support Simplified/Traditional Chinese, default: `zh-tw`
+const test10 = converter('-123', { lang: 'zh-cn' });
+assert.equal(test10, '负壹佰贰十参');

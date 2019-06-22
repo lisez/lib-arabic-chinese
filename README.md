@@ -11,6 +11,7 @@ A library for converting from Arabic numbers to Chinese numbers. For example, `8
 - Support customized prefix/suffix.
 - Support customized output style of signed symbols.
 - Support `Nubmer` and `BigInt`.
+- Support `Traditional` and `Simplified` Chinese.
 
 ## Installation
 
@@ -67,6 +68,11 @@ assert.equal(test8, '海拔負壹佰貳拾參');
 // Able to customize the output of signed symbols, default: 正 for plus, 負 for minus
 const test9 = converter('-123', { signedOutput: { minusSigned: '下降' } });
 assert.equal(test9, '下降壹佰貳拾參');
+
+// Support Simplified/Traditional Chinese, default: `zh-tw`
+const test10 = converter('-123', { lang: 'zh-cn' });
+assert.equal(test10, '负壹佰贰十参');
+
 ```
 
 ### `Important`: BigInt and Number
@@ -94,9 +100,10 @@ The default configuration options would be:
 
 ```javascript
 { caseType: 'upper', // `upper` | `lower`
+  lang: 'zh-tw', // 'zh-tw' | 'zh-cn'
   showPlusSigned: false,
   showMinusSigned: true,
-  signedOutput: { plusSigned: '正', minusSigned: '負' },
+  signedOutput: { },
   prefix: '',
   suffix: '',
   prefixPosition: 'after-signed' // `after-signed` | `before-signed`
@@ -105,9 +112,10 @@ The default configuration options would be:
 
 ## Todo & Roadmap
 
-- [ ] Support Simple Chinese. (ex. `億/亿`)
+- [x] Support Simple Chinese. (ex. `億/亿`)
 - [x] Support Positive numbers (integer).
 - [x] Support Negative numbers (integer).
 - [ ] Support Floating numbers. (ex. `3.14` to `三點一四`)
 - [ ] Support Fraction numbers. (ex. `4/5` to `五分之四`)
 - [ ] Support Mixing numbers. (ex. `4,500萬` to `四千五百萬`)
+- [ ] Support Metric unit rule.
