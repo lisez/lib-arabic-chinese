@@ -1,22 +1,18 @@
-export type TSigned = 'plusSigned' | 'minusSigned';
-
-export type TSignedMapping = { [signed in TSigned]: string };
+import SignedLang, { TSignedMapping } from './lang/Signed';
+import { IConverterConfig } from './index';
 
 export type TSignedConfig = {
-  readonly signedOutput: TSignedMapping;
+  readonly signedOutput: Partial<TSignedMapping>;
   readonly showPlusSigned: boolean;
   readonly showMinusSigned: boolean;
-};
-
-export const signedMapping: TSignedMapping = {
-  plusSigned: '正',
-  minusSigned: '負'
+  readonly lang: IConverterConfig['lang'];
 };
 
 export const defaultSignedConfig: TSignedConfig = {
   showPlusSigned: false,
   showMinusSigned: true,
-  signedOutput: signedMapping
+  signedOutput: {},
+  lang: 'zh-tw'
 };
 
 export default class Signed extends String {
@@ -55,7 +51,7 @@ export default class Signed extends String {
   }
 
   private get mapping(): { symbol: TSignedMapping } {
-    const symbol = this.config.signedOutput;
+    let symbol = <TSignedMapping>this.config.signedOutput;
     return { symbol };
   }
 
@@ -90,6 +86,7 @@ export default class Signed extends String {
       ...(config || {}),
       signedOutput: {
         ...defaultSignedConfig.signedOutput,
+        ...((config || {}).lang ? SignedLang[config.lang!] : {}),
         ...((config || {}).signedOutput || {})
       }
     };
