@@ -1,14 +1,16 @@
 import Signed, { TSignedConfig, defaultSignedConfig } from './Signed';
-import Digit, { TConfig, defaultConfig } from './Digit';
+import Digit, { TDigitConfig, defaultConfig } from './Digit';
+import { TLangCode, Langs } from './lang';
 
 type prefixPosition = 'before-signed' | 'after-signed';
 
 export interface IConverterConfig
-  extends Pick<TConfig, Exclude<keyof TConfig, 'placeUnit'>>,
+  extends Pick<TDigitConfig, Exclude<keyof TDigitConfig, 'placeUnit' | 'lang'>>,
     TSignedConfig {
   readonly prefix: string;
   readonly suffix: string;
   readonly prefixPosition: prefixPosition;
+  readonly lang: TLangCode;
 }
 
 const defaultConverterConfig: IConverterConfig = {
@@ -16,10 +18,11 @@ const defaultConverterConfig: IConverterConfig = {
   ...defaultSignedConfig,
   prefix: '',
   suffix: '',
-  prefixPosition: 'after-signed'
+  prefixPosition: 'after-signed',
+  lang: 'zh-tw'
 };
 
-function objectize(numbers: string[], config: RecursivePartial<IConverterConfig> = {}): Digit[] {
+function objectize(numbers: string[], config: IConverterConfig): Digit[] {
   const digits: Digit[] = [];
   numbers.forEach((n, i) => {
     const digit = new Digit(n, { ...config, placeUnit: i });
@@ -38,7 +41,7 @@ function isValidNumberText(nText: string): boolean {
 
 export default function main(
   text: string | number | bigint,
-  userConfig: RecursivePartial<IConverterConfig> = defaultConverterConfig
+  userConfig: Partial<IConverterConfig> = defaultConverterConfig
 ): string {
   if (typeof text === 'number' || typeof text === 'bigint') {
     return main(text.toString(), userConfig);
@@ -49,6 +52,10 @@ export default function main(
 
   if (!isValidNumberText(toNormal)) {
     throw new Error('invalid number or number has exponent symbol after it has been converted. ');
+  }
+
+  if (!Langs.includes(config.lang)) {
+    throw new Error('invalid lang code');
   }
 
   const hasSigned = Signed.hasSigned(toNormal);
