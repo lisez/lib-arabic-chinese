@@ -1,5 +1,7 @@
 import { TLangCode } from '../index';
+
 import zhTW from './zh-tw';
+import zhCN from './zh-cn';
 
 export type TSymbol<T> = [T, T, T, T, T, T, T, T, T, T];
 
@@ -22,7 +24,8 @@ export type TDigitMapping = {
 export type TDigitLang = { [langCode in TLangCode]: TDigitMapping };
 
 const langs: TDigitLang = {
-  'zh-tw': zhTW
+  'zh-tw': zhTW,
+  'zh-cn': zhCN
 };
 
 export default langs;
