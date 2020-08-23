@@ -15,7 +15,8 @@ const webpackConfig: Configuration = {
     library: 'libArabicChinese',
     libraryTarget: 'umd',
     libraryExport: 'default',
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    globalObject: 'this'
   },
   resolve: { extensions: ['.ts', '.tsx', '.js'] },
   module: {
