@@ -110,6 +110,24 @@ The default configuration options would be:
 }
 ```
 
+## Installation for development purposes.  
+You will need NodeJS v11.14.0 (check .nvmrc file) and yarn installed. 
+
+1. Clone the repository. 
+2. Execute ```npm i```
+ 
+In case you get errors like these bellow under Windows 
+```
+  1:19  error  Expected linebreaks to be 'LF' but found 'CRLF'  linebreak-style
+  2:21  error  Expected linebreaks to be 'LF' but found 'CRLF'  linebreak-style
+  3:27  error  Expected linebreaks to be 'LF' but found 'CRLF'  linebreak-style
+  4:3   error  Expected linebreaks to be 'LF' but found 'CRLF'  linebreak-style
+
+✖ 4 problems (4 errors, 0 warnings)
+  4 errors and 0 warnings potentially fixable with the `--fix` option.
+```
+you can fix them by using the embedded  dos2unix Gitbash tool ```dos2unix.exe jest.config.js```
+
 ## Todo & Roadmap
 
 - [x] Support Simple Chinese. (ex. `億/亿`)
