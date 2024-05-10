@@ -31,20 +31,20 @@ export default class Signed extends String {
 
   config: TSignedConfig;
 
-  // @ts-ignore
+  // @ts-expect-error
   constructor(signed: string, config: RecursivePartial<TSignedConfig> = {}) {
-    // @ts-ignore
+    // @ts-expect-error
     this = new String(signed);
-    // @ts-ignore
+    // @ts-expect-error
     this.__proto__ = Signed.prototype;
-    // @ts-ignore
+    // @ts-expect-error
     this.setup(config);
 
     if (String(signed).length > 1 || String(signed).length === 0) {
       throw new TypeError('invalid signed length');
     }
 
-    // @ts-ignore
+    // @ts-expect-error
     if (!this.isPlus && !this.isMinus) {
       throw new TypeError('signed should be plus or minus');
     }
