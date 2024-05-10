@@ -25,7 +25,7 @@ export type TDigitLang = { [langCode in TLangCode]: TDigitMapping };
 
 const langs: TDigitLang = {
   'zh-tw': zhTW,
-  'zh-cn': zhCN
+  'zh-cn': zhCN,
 };
 
 export default langs;

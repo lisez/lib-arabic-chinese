@@ -43,7 +43,7 @@ const zhCharMapping: { [char: string]: string } = {
   溝: '沟',
   澗: '涧',
   // 正: '正',
-  載: '载'
+  載: '载',
 };
 
 export default zhCharMapping;

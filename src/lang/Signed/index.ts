@@ -11,7 +11,7 @@ export type TSignedLang = { [langCode in TLangCode]: TSignedMapping };
 
 const langs: TSignedLang = {
   'zh-tw': zhTW,
-  'zh-cn': zhCN
+  'zh-cn': zhCN,
 };
 
 export default langs;

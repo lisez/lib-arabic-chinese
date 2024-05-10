@@ -4,7 +4,7 @@ import zhCharMapping from './utils/zhCharsMapping';
 
 for (const testset of TestCases) {
   describe(testset.set, () => {
-    for (let [tNumber, eValue] of Object.entries(testset.data)) {
+    for (const [tNumber, eValue] of Object.entries(testset.data)) {
       test(`(String) ${tNumber} -> ${eValue}`, () => {
         const aValue = Converter(tNumber, <IConverterConfig>(testset.options || {}));
         expect(aValue).toEqual(eValue);
@@ -13,7 +13,7 @@ for (const testset of TestCases) {
       // to simple
       const toSimple = (<string>eValue)
         .split('')
-        .map(c => zhCharMapping[c] || c)
+        .map((c) => zhCharMapping[c] || c)
         .join('');
       test(`(Simple) ${tNumber} -> ${toSimple}`, () => {
         const opt = <IConverterConfig>{ ...(testset.options || {}), lang: 'zh-cn' };

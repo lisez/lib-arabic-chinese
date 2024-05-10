@@ -72,7 +72,6 @@ assert.equal(test9, '下降壹佰貳拾參');
 // Support Simplified/Traditional Chinese, default: `zh-tw`
 const test10 = converter('-123', { lang: 'zh-cn' });
 assert.equal(test10, '负壹佰贰拾参');
-
 ```
 
 ### `Important`: BigInt and Number
