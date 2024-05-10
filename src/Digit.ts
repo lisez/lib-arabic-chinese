@@ -10,7 +10,7 @@ export type TDigitConfig = {
 export const defaultConfig: TDigitConfig = {
   caseType: 'upper',
   placeUnit: -1,
-  lang: 'zh-tw'
+  lang: 'zh-tw',
 };
 
 export default class Digit extends String {
@@ -19,13 +19,13 @@ export default class Digit extends String {
   prev: Digit;
   next: Digit;
 
-  // @ts-ignore
+  // @ts-expect-error
   constructor(digit: number | string, config: Partial<TDigitConfig> = {}) {
-    // @ts-ignore
+    // @ts-expect-error
     this = new String(digit);
-    // @ts-ignore
+    // @ts-expect-error
     this.__proto__ = Digit.prototype;
-    // @ts-ignore
+    // @ts-expect-error
     this.config = { ...defaultConfig, ...config };
 
     if (String(digit).length > 1 || String(digit).length === 0) {
@@ -133,8 +133,8 @@ export default class Digit extends String {
     return unit > 0
       ? unit
       : this.config.placeUnit > 44
-      ? this.config.placeUnit % 44
-      : this.config.placeUnit;
+        ? this.config.placeUnit % 44
+        : this.config.placeUnit;
   }
 
   private get unit(): string {
@@ -145,7 +145,8 @@ export default class Digit extends String {
     if (this.unitType <= 3) {
       const index = String(this.unitType) as keyof (
         | TDigitMapping['lowerCaseUnitMapping']
-        | TDigitMapping['upperCaseUnitMapping']);
+        | TDigitMapping['upperCaseUnitMapping']
+      );
       return this.mapping.unit[index];
     }
 
