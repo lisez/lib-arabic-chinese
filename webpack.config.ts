@@ -16,7 +16,7 @@ const webpackConfig: Configuration = {
     libraryTarget: 'umd',
     libraryExport: 'default',
     umdNamedDefine: true,
-    globalObject: 'this'
+    globalObject: 'this',
   },
   resolve: { extensions: ['.ts', '.tsx', '.js'] },
   module: {
@@ -25,11 +25,11 @@ const webpackConfig: Configuration = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         options: {
-          configFile: path.resolve('./tsconfig.build.json')
-        }
-      }
-    ]
-  }
+          configFile: path.resolve('./tsconfig.build.json'),
+        },
+      },
+    ],
+  },
 };
 
 export default webpackConfig;

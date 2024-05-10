@@ -12,7 +12,7 @@ export const defaultSignedConfig: TSignedConfig = {
   showPlusSigned: false,
   showMinusSigned: true,
   signedOutput: {},
-  lang: 'zh-tw'
+  lang: 'zh-tw',
 };
 
 export default class Signed extends String {
@@ -51,7 +51,7 @@ export default class Signed extends String {
   }
 
   private get mapping(): { symbol: TSignedMapping } {
-    let symbol = <TSignedMapping>this.config.signedOutput;
+    const symbol = <TSignedMapping>this.config.signedOutput;
     return { symbol };
   }
 
@@ -87,8 +87,8 @@ export default class Signed extends String {
       signedOutput: {
         ...defaultSignedConfig.signedOutput,
         ...((config || {}).lang ? SignedLang[config.lang!] : {}),
-        ...((config || {}).signedOutput || {})
-      }
+        ...((config || {}).signedOutput || {}),
+      },
     };
 
     return this;

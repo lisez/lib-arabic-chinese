@@ -19,7 +19,7 @@ const defaultConverterConfig: IConverterConfig = {
   prefix: '',
   suffix: '',
   prefixPosition: 'after-signed',
-  lang: 'zh-tw'
+  lang: 'zh-tw',
 };
 
 function objectize(numbers: string[], config: IConverterConfig): Digit[] {
@@ -41,7 +41,7 @@ function isValidNumberText(nText: string): boolean {
 
 export default function main(
   text: string | number | bigint,
-  userConfig: Partial<IConverterConfig> = defaultConverterConfig
+  userConfig: Partial<IConverterConfig> = defaultConverterConfig,
 ): string {
   if (typeof text === 'number' || typeof text === 'bigint') {
     return main(text.toString(), userConfig);
@@ -66,10 +66,7 @@ export default function main(
   }
 
   const numberText = hasSigned ? toNormal.slice(1) : toNormal;
-  const numberToChars = numberText
-    .replace(/[,，]/g, '')
-    .split('')
-    .reverse();
+  const numberToChars = numberText.replace(/[,，]/g, '').split('').reverse();
 
   const numberToDigits = objectize(numberToChars, config);
   const number = numberToDigits.reduce((p, c) => c.toString() + p, '');

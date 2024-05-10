@@ -8,13 +8,13 @@ const mapping: TDigitMapping = {
   upperCaseUnitMapping: {
     '1': '拾',
     '2': '佰',
-    '3': '仟'
+    '3': '仟',
   },
 
   lowerCaseUnitMapping: {
     '1': '十',
     '2': '百',
-    '3': '千'
+    '3': '千',
   },
 
   largeUnitMapping: {
@@ -28,8 +28,8 @@ const mapping: TDigitMapping = {
     '32': '溝',
     '36': '澗',
     '40': '正',
-    '44': '載'
-  }
+    '44': '載',
+  },
 };
 
 export default mapping;
