@@ -1,4 +1,4 @@
-import Converter, { IConverterConfig } from '../dist';
+import Converter, { IConverterConfig } from '../dist/src';
 import TestCases from './testcases.json';
 import zhCharMapping from './utils/zhCharsMapping';
 
