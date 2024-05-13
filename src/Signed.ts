@@ -29,22 +29,18 @@ export default class Signed extends String {
     return string === '-';
   }
 
+  // @ts-expect-error
   config: TSignedConfig;
 
-  // @ts-expect-error
   constructor(signed: string, config: RecursivePartial<TSignedConfig> = {}) {
-    // @ts-expect-error
-    this = new String(signed);
-    // @ts-expect-error
-    this.__proto__ = Signed.prototype;
-    // @ts-expect-error
-    this.setup(config);
-
     if (String(signed).length > 1 || String(signed).length === 0) {
-      throw new TypeError('invalid signed length');
+      throw new RangeError('invalid signed length');
     }
 
-    // @ts-expect-error
+    super(signed);
+
+    this.setup(config);
+
     if (!this.isPlus && !this.isMinus) {
       throw new TypeError('signed should be plus or minus');
     }
