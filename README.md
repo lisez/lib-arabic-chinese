@@ -5,12 +5,11 @@ A library for converting from Arabic numbers to Chinese numbers. For example, `8
 ## Features
 
 - Theoretically support up to `10^44`. (For now, testings only cover from `10^0` to `10^16`).
-- Support `TypeScript@^3`.
 - Support `Node.js` and `browser`.
 - Support uppercase(ex. `壹貳參`) or lowercase(ex. `一二三`).
 - Support customized prefix/suffix.
 - Support customized output style of signed symbols.
-- Support `Nubmer` and `BigInt`.
+- Support `Number` and `BigInt`.
 - Support `Traditional` and `Simplified` Chinese.
 
 ## Installation
@@ -76,7 +75,7 @@ assert.equal(test10, '负壹佰贰拾参');
 
 ### `Important`: BigInt and Number
 
-The conveter could be passed `Number` or `BigInt` now. But it only calls `Number.prototype.toString` and `BigInt.prototype.toString` methods to make a `String`. Then **it might be occurred some unexpected behaviours while it calls if the number is overflowed.**
+The converter could be passed `Number` or `BigInt` now. But it only calls `Number.prototype.toString` and `BigInt.prototype.toString` methods to make a `String`. Then **it might be occurred some unexpected behaviours while it calls if the number is overflowed.**
 
 For example:
 
