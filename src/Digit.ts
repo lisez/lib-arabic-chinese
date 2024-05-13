@@ -14,27 +14,23 @@ export const defaultConfig: TDigitConfig = {
 };
 
 export default class Digit extends String {
+  // @ts-expect-error
   config: TDigitConfig;
 
-  prev: Digit;
-  next: Digit;
+  prev?: Digit;
+  next?: Digit;
 
-  // @ts-expect-error
   constructor(digit: number | string, config: Partial<TDigitConfig> = {}) {
-    // @ts-expect-error
-    this = new String(digit);
-    // @ts-expect-error
-    this.__proto__ = Digit.prototype;
-    // @ts-expect-error
-    this.config = { ...defaultConfig, ...config };
-
     if (String(digit).length > 1 || String(digit).length === 0) {
-      throw new TypeError('invalid digit length');
+      throw new RangeError('invalid digit length');
     }
 
     if (!/^\d+$/.test(String(digit))) {
       throw new TypeError('invalid number');
     }
+
+    super(digit);
+    this.setup(config);
   }
 
   public setup(config: Partial<TDigitConfig>): this {
@@ -80,7 +76,7 @@ export default class Digit extends String {
     return this.toNumber() === 0
       ? this.config.placeUnit === 0
         ? true
-        : this.prev.isZeroEnd
+        : !!this.prev?.isZeroEnd
       : false;
   }
 
