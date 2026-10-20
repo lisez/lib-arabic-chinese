@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import Converter, { IConverterConfig } from '../src/index';
 import TestCases from './testcases.json';
 import zhCharMapping from './utils/zhCharsMapping';

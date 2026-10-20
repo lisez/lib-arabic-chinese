@@ -15,10 +15,6 @@ A library for converting from Arabic numbers to Chinese numbers. For example, `8
 ## Installation
 
 ```bash
-# install by yarn
-yarn add lib-arabic-chinese
-
-# or install by npm
 npm install lib-arabic-chinese
 ```
 
@@ -107,6 +103,34 @@ The default configuration options would be:
   prefixPosition: 'after-signed' // `after-signed` | `before-signed`
 }
 ```
+
+## Development
+
+Use Node.js 22.12+ (Node 22 or 24) and npm:
+
+```bash
+npm ci
+npm run format:check
+npm run lint
+npm run typecheck
+npm test
+npm run demo
+npm run verify:package
+```
+
+`npm test` builds the package before running Vitest against source and distribution output.
+Use `npm run test:watch` for watch mode and `npm run format` to apply Oxfmt formatting.
+`npm run lint` runs Oxlint, and `npm run demo` runs the TypeScript examples through tsx.
+
+`npm run build` (also available as `npm run bundle`) uses Vite and TypeScript to produce:
+
+- `dist/index.js`: UMD, exposing a callable CommonJS export and the browser global `libArabicChinese`.
+- `dist/index.mjs`: ESM with the converter as its default export.
+- `dist/index.d.cts`, `dist/index.d.mts`, and supporting declarations: TypeScript types for CommonJS and ESM.
+
+The package keeps `main` for CommonJS, `module` for ESM-aware bundlers, and `types`
+for TypeScript. Native ESM can import `lib-arabic-chinese/dist/index.mjs` directly.
+`npm run verify:package` checks the packed files and compiles and runs TypeScript consumers.
 
 ## Todo & Roadmap
 

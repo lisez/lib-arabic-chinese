@@ -1,3 +1,4 @@
+import type { RecursivePartial } from './types';
 import SignedLang, { TSignedMapping } from './lang/Signed';
 import { IConverterConfig } from './index';
 

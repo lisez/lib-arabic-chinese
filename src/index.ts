@@ -5,8 +5,7 @@ import { TLangCode, Langs } from './lang';
 type prefixPosition = 'before-signed' | 'after-signed';
 
 export interface IConverterConfig
-  extends Pick<TDigitConfig, Exclude<keyof TDigitConfig, 'placeUnit' | 'lang'>>,
-    TSignedConfig {
+  extends Pick<TDigitConfig, Exclude<keyof TDigitConfig, 'placeUnit' | 'lang'>>, TSignedConfig {
   readonly prefix: string;
   readonly suffix: string;
   readonly prefixPosition: prefixPosition;
@@ -66,7 +65,10 @@ export default function main(
   }
 
   const numberText = hasSigned ? toNormal.slice(1) : toNormal;
-  const numberToChars = numberText.replace(/[,，]/g, '').split('').reverse();
+  const numberToChars = numberText
+    .replace(/[,，]/g, '')
+    .split('')
+    .reverse();
 
   const numberToDigits = objectize(numberToChars, config);
   const number = numberToDigits.reduce((p, c) => c.toString() + p, '');
